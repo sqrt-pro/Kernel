@@ -1,6 +1,6 @@
 <?php
 
-namespace CMSx;
+namespace SQRT;
 
 use League\Plates\Template\Template;
 use Symfony\Component\HttpFoundation\JsonResponse;
