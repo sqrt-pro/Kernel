@@ -1,4 +1,3 @@
-Controller
-==========
+# SQRT\Controller
 
 Контроллеры и роутинг
