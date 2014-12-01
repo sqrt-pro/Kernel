@@ -55,6 +55,28 @@ class Controller
     return $req->getSession();
   }
 
+  /** Добавить всплывающее сообщение */
+  public function notice($message, $type = null)
+  {
+    $type = is_null($type)
+      ? 'info'
+      : (is_bool($type)
+        ? ($type
+          ? 'success'
+          : 'error')
+        : $type);
+
+    $this->getSession()->getFlashBag()->add($type, $message);
+
+    return $this;
+  }
+
+  /** Получить все всплывающие сообщения */
+  public function getNotices()
+  {
+    return $this->getSession()->getFlashBag()->all();
+  }
+
   /**
    * Движок шаблонизатора Plates
    *

@@ -1,6 +1,6 @@
 {
-    "name": "sqrt-pro/controller",
-    "description": "Controller is part of SQRT Framework",
+    "name": "sqrt-pro/kernel",
+    "description": "Kernel is part of SQRT Framework",
     "homepage": "http://fw.sqrt.pro",
     "type": "library",
     "license": "MIT",
