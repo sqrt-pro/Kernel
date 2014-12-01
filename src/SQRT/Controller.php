@@ -25,8 +25,10 @@ class Controller
     $this->request = $request;
 
     if (is_null($url)) {
-      $this->url = new URL($request->getUri());
+      $url = new URL($request->getUri());
     }
+
+    $this->url = $url;
   }
 
   /** @return Request */
