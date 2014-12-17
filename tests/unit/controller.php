@@ -2,19 +2,18 @@
 
 require_once __DIR__ . '/../init.php';
 
-use SQRT\ControllerResolver;
 use Symfony\Component\HttpFoundation\Request;
 
 class ControllerTest extends PHPUnit_Framework_TestCase
 {
-  function testPlatesEngine()
+  function testPlatesEngineAndLayout()
   {
     $r = Request::create('/hello/');
     $c = new \SQRT\Controller($r);
 
     $this->assertInstanceOf('League\Plates\Engine', $c->getTemplatesEngine(), 'Движок создался');
-
-    $this->assertInstanceOf('League\Plates\Template\Template', $t = $c->template('ololo'), 'Шаблон создался');
+    $this->assertInstanceOf('League\Plates\Template\Template', $c->template('ololo'), 'Шаблон создался');
+    $this->assertInstanceOf('SQRT\Layout', $c->layout(), 'Layout создался');
   }
 
   function testUrlFromRequest()

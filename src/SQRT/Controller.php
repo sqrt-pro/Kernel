@@ -31,6 +31,12 @@ class Controller
     $this->url = $url;
   }
 
+  /** @return Layout */
+  public function layout($template = null)
+  {
+    return new Layout($this->getTemplatesEngine(), $template);
+  }
+
   /** @return Request */
   public function getRequest()
   {
