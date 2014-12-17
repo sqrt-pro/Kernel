@@ -29,6 +29,11 @@ class Layout extends Container
     $this->init();
   }
 
+  function __toString()
+  {
+    return $this->render();
+  }
+
   /** Рендеринг страницы */
   public function render($template = null)
   {
