@@ -14,7 +14,7 @@ class Controller
   /** @var Request */
   protected $request;
 
-  /** @var URL */
+  /** @var URLImmutable */
   protected $url;
 
   /** @var Engine */
@@ -23,12 +23,7 @@ class Controller
   function __construct(Request $request, URL $url = null)
   {
     $this->request = $request;
-
-    if (is_null($url)) {
-      $url = new URL($request->getUri());
-    }
-
-    $this->url = $url;
+    $this->url     = new URLImmutable(is_null($url) ? $request->getUri() : $url);
   }
 
   /** @return Layout */
@@ -43,7 +38,7 @@ class Controller
     return $this->request;
   }
 
-  /** @return URL */
+  /** @return URLImmutable */
   public function getUrl()
   {
     return $this->url;

@@ -26,6 +26,11 @@ class ControllerTest extends PHPUnit_Framework_TestCase
       $c->getUrl()->asString(true),
       'URL создался из Request'
     );
+
+    $this->assertInstanceOf('SQRT\URLImmutable', $c->getUrl(), 'URL является объектом Immutable');
+
+    $c = new \SQRT\Controller($r, new \SQRT\URL('/hello/'));
+    $this->assertInstanceOf('SQRT\URLImmutable', $c->getUrl(), 'URL трансформируется в объект Immutable');
   }
 
   /**
