@@ -8,6 +8,7 @@
         "symfony/http-foundation": "~2.6",
         "symfony/http-kernel": "~2.6",
         "sqrt-pro/url": "dev-master",
+        "sqrt-pro/db": "dev-master",
         "league/plates": "~3.0"
     },
     "autoload": {
