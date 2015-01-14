@@ -38,6 +38,11 @@ class EventListener implements EventSubscriberInterface
   public function onException(GetResponseForExceptionEvent $event)
   {
     $request = Request::create($this->error_path);
+
+    if ($event->getRequest()->hasSession()) {
+      $request->setSession($event->getRequest()->getSession());
+    }
+
     $request->attributes->add(
       array(
         'exception' => FlattenException::create($event->getException())
@@ -61,7 +66,7 @@ class EventListener implements EventSubscriberInterface
     if (is_array($result)) {
       $response = JsonResponse::create($result);
     } else {
-      if ($result instanceof Template) {
+      if ($result instanceof Template or $result instanceof Layout) {
         $result = $result->render();
       }
 
