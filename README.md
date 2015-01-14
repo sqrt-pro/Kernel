@@ -103,7 +103,7 @@ function __call()
 
 * Если `$type == null` => `info`
 * Если `$type === false` => `error`
-* Если `$type === null` => `success`
+* Если `$type === true` => `success`
   
 Для отображения таких сообщений в шаблоне используется расширение `SQRT\Plates\Extension\Notice`, в шаблоне добавляется методы:
 
