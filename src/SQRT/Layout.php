@@ -37,7 +37,7 @@ class Layout extends Container
   /** Рендеринг страницы */
   public function render($template = null)
   {
-    return $this->getEngine()->render($template ?: $this->getTemplate(), array('page' => $this));
+    return $this->getEngine()->render($template ?: $this->getTemplate(), array('layout' => $this));
   }
 
   /**
