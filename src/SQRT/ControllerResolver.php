@@ -2,6 +2,7 @@
 
 namespace SQRT;
 
+use Stringy\StaticStringy;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Controller\ControllerResolverInterface;
@@ -36,8 +37,20 @@ class ControllerResolver implements ControllerResolverInterface
       }
     }
 
-    $one = $url->getArgument(1);
-    $two = $url->getArgument(2);
+    $file = $url->getFileName(true);
+    $one  = $url->getArgument(1);
+    $two  = $url->getArgument(2);
+
+    if ($file) {
+      $str = pathinfo($file, PATHINFO_FILENAME);
+      if (!$two) {
+        if (!$one) {
+          $one = $str;
+        } else {
+          $two = $str;
+        }
+      }
+    }
 
     $controller = 'default';
     $action     = 'index';
