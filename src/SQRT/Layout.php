@@ -4,9 +4,8 @@ namespace SQRT;
 
 use SQRT\Tag;
 use League\Plates\Engine;
-use SQRT\Helpers\Container;
 
-class Layout extends Container
+class Layout extends \SQRT\Helpers\Container
 {
   /** @var Engine */
   protected $engine;

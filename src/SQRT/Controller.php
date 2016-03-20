@@ -3,27 +3,21 @@
 namespace SQRT;
 
 use League\Plates\Engine;
+use League\Container\Container;
 use League\Plates\Template\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Controller
 {
-  /** @var Request */
-  protected $request;
+  /** @var Container */
+  protected $container;
 
-  /** @var URLImmutable */
-  protected $url;
-
-  /** @var Engine */
-  protected $engine;
-
-  function __construct(Request $request, URL $url = null)
+  function __construct(Container $container)
   {
-    $this->request = $request;
-    $this->url     = new URLImmutable(is_null($url) ? $request->getUri() : $url);
+    $this->container = $container;
   }
 
   /** @return Layout */
@@ -35,13 +29,13 @@ class Controller
   /** @return Request */
   public function getRequest()
   {
-    return $this->request;
+    return $this->container->get(Request::class);
   }
 
   /** @return URLImmutable */
   public function getUrl()
   {
-    return $this->url;
+    return $this->container->get(URL::class);
   }
 
   /** @return Session */
@@ -50,7 +44,7 @@ class Controller
     $req = $this->getRequest();
 
     if (!$req->hasSession() && $autostart) {
-      $req->setSession(new Session());
+      $req->setSession($this->container->get(Session::class));
     }
 
     return $req->getSession();
@@ -85,19 +79,7 @@ class Controller
    */
   public function getTemplatesEngine()
   {
-    if (is_null($this->engine)) {
-      $this->engine = new Engine;
-    }
-
-    return $this->engine;
-  }
-
-  /** Движок шаблонизатора Plates */
-  public function setTemplatesEngine(Engine $engine)
-  {
-    $this->engine = $engine;
-
-    return $this;
+    $this->container->get(Engine::class);
   }
 
   /**

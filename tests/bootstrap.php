@@ -8,6 +8,3 @@
  */
 
 require_once __DIR__ . '/../vendor/autoload.php';
-
-/** Путь к тестовым контроллерам */
-define('CTRL_PATH', __DIR__ . '/ctrl');
