@@ -79,7 +79,7 @@ class Controller
    */
   public function getTemplatesEngine()
   {
-    $this->container->get(Engine::class);
+    return $this->container->get(Engine::class);
   }
 
   /**
