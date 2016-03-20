@@ -12,7 +12,7 @@
         "symfony/http-kernel": "~2.6",
         "league/route": "~1.2",
         "sqrt-pro/url": "~0.1",
-        "sqrt-pro/db": "~0.2",
+        "sqrt-pro/db": "~0.1",
         "league/plates": "~3.0"
     },
     "require-dev": {
