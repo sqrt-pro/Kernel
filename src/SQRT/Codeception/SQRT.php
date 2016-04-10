@@ -16,10 +16,19 @@ class SQRT extends Framework
   /** @var Container */
   protected $container;
 
+  protected $kernel_class;
+
+  protected $requiredFields = ['app'];
+
   public function _initialize()
   {
     if (!file_exists(Configuration::projectDir() . $this->config['app'])) {
       throw new ModuleConfigException(__CLASS__, "Bootstrap file {$this->config['app']} not found");
+    }
+
+    $this->kernel_class = !empty($this->config['kernel']) ? $this->config['kernel'] : Kernel::class;
+    if (!class_exists($this->kernel_class)) {
+      throw new ModuleConfigException(__CLASS__, "Kernel class {$this->kernel_class} not exists");
     }
   }
 
@@ -29,7 +38,8 @@ class SQRT extends Framework
 
     $this->getManager()->beginTransaction();
 
-    $this->client = new Client(new Kernel($this->container));
+    $class = $this->kernel_class;
+    $this->client = new Client(new $class($this->container));
   }
 
   public function _after(TestCase $test)
